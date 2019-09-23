@@ -5,7 +5,12 @@ pipeline {
   stages {
     stage ('Test') {
       steps {
+        checkout scm
         echo "TESTAR PIPELINE groovy base test"
+        script {
+            def helper = load 'groovyTest/helper.groovy'
+            helper.test1()
+        }
       }
     }
   }
