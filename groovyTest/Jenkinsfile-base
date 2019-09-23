@@ -1,0 +1,9 @@
+#!groovy -*- mode: groovy -*-
+
+pipeline {
+	stages {
+      stage ('Test') {
+          echo "TESTAR PIPELINE groovy base test"
+      }
+	}
+}
