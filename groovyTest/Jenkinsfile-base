@@ -1,9 +1,12 @@
 #!groovy -*- mode: groovy -*-
 
 pipeline {
-	stages {
-      stage ('Test') {
-          echo "TESTAR PIPELINE groovy base test"
+  agent { label 'master' }
+  stages {
+    stage ('Test') {
+      steps {
+        echo "TESTAR PIPELINE groovy base test"
       }
-	}
+    }
+  }
 }
