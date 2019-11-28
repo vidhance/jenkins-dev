@@ -1,0 +1,19 @@
+#!groovy -*- mode: groovy -*-
+// Checking if stable repositories are compatible. SDK needs to be compatible with CORE and all other repos needs to be compatible with SDK. 
+
+pipeline {
+  agent { label 'drone'}
+  parameters {
+    string(name: 'COMMIT_ID', defaultValue: '')
+  }
+
+  stages {
+    stage('Checkout structural') {
+      steps {
+        build(job: 'jenkins-dev/git-param-test/develop',
+              parameters: [string(name: 'STRUCTURAL_BRANCH', value: params.COMMIT_ID)]
+        )
+      }
+    }
+  }
+}
