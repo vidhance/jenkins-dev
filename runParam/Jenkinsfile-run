@@ -1,0 +1,18 @@
+#!groovy -*- mode: groovy -*-
+
+pipeline {
+  agent { label 'drone'}
+
+  parameters {
+    run(name: 'SDK_BUILD', description: 'Run of /stable/sdk to copy artifacts from', filter: 'STABLE', projectName: getSuccessfulPipeline('sdk'))
+  }
+
+  stages {
+    stage('Checkout structural') {
+      steps {
+        echo 'start'
+        //library("imint-jenkins-lib@develop")
+      }
+    }
+  }
+}
