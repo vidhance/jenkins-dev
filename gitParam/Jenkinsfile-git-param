@@ -13,7 +13,7 @@ pipeline {
     stage('Checkout structural') {
       steps {
         sh "rm -rf ${WORKSPACE}/*"
-        //git branch: "${params.STRUCTURAL_BRANCH}", credentialsId: 'vidhance-reader-login', url: 'https://github.com/vidhance/structural'
+        git branch: "${params.STRUCTURAL_BRANCH}", credentialsId: 'vidhance-reader-login', url: 'https://github.com/vidhance/structural'
         // checkout([$class: 'GitSCM',
         //           branches: [[name: params.STRUCTURAL_BRANCH]],
         //           extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'structural']],
