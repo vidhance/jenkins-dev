@@ -3,6 +3,9 @@
 
 pipeline {
   agent { label 'drone'}
+  options {
+    skipDefaultCheckout()
+  }
   parameters {
     gitParameter(name: 'JENKINSDEV_BRANCH', type: 'PT_BRANCH_TAG', defaultValue: 'develop', branchFilter: 'origin/(.*)',
               useRepository: '.*/jenkins-dev', listSize: '10', quickFilterEnabled: true, selectedValue: 'DEFAULT', sortMode: 'ASCENDING_SMART')
@@ -12,6 +15,7 @@ pipeline {
   stages {
     stage('Checkout structural') {
       steps {
+        sh 'rm -rf *'
         echo "${params.JENKINSDEV_BRANCH}"
         echo "${params.STRUCTURAL_BRANCH}"
         // checkout([$class: 'GitSCM',
