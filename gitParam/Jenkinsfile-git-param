@@ -10,7 +10,7 @@ pipeline {
     gitParameter(name: 'JENKINSDEV_BRANCH', type: 'PT_BRANCH_TAG', defaultValue: 'develop', branchFilter: 'origin/(.*)',
               useRepository: '.*/jenkins-dev', listSize: '10', quickFilterEnabled: true, selectedValue: 'DEFAULT', sortMode: 'ASCENDING_SMART')
     gitParameter(name: 'STRUCTURAL_BRANCH', type: 'BRANCH', defaultValue: 'develop', branchFilter: 'origin/(.*)',
-              useRepository: '.*/structural', listSize: '10', quickFilterEnabled: true, selectedValue: 'DEFAULT', sortMode: 'ASCENDING_SMART')
+              useRepository: '.*/structural.git', listSize: '10', quickFilterEnabled: true, selectedValue: 'DEFAULT', sortMode: 'ASCENDING_SMART')
   }
   stages {
     stage('Checkout structural') {
