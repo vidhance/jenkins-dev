@@ -12,11 +12,13 @@ pipeline {
   stages {
     stage('Checkout structural') {
       steps {
-        checkout([$class: 'GitSCM',
-                  branches: [[name: params.STRUCTURAL_BRANCH]],
-                  extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'structural']],
-                  userRemoteConfigs: [[credentialsId: 'vidhance-reader-login', url: 'https://github.com/vidhance/structural']]
-        ])
+        sh "rm -rf ${WORKSPACE}/* ${WORKSPACE}/.*"
+        git branch: "${params.STRUCTURAL_BRANCH}", credentialsId: 'vidhance-reader-login', url: 'https://github.com/vidhance/structural'
+        // checkout([$class: 'GitSCM',
+        //           branches: [[name: params.STRUCTURAL_BRANCH]],
+        //           extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'structural']],
+        //           userRemoteConfigs: [[credentialsId: 'vidhance-reader-login', url: 'https://github.com/vidhance/structural']]
+        // ])
         echo "${params.JENKINSDEV_BRANCH}"
         echo "${params.STRUCTURAL_BRANCH}"
       }
