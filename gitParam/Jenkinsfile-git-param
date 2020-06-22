@@ -12,7 +12,6 @@ pipeline {
   stages {
     stage('Checkout structural') {
       steps {
-        sh 'rm -rf *'
         echo "${params.JENKINSDEV_BRANCH}"
         echo "${params.STRUCTURAL_BRANCH}"
         // checkout([$class: 'GitSCM',
