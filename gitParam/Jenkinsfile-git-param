@@ -3,9 +3,6 @@
 
 pipeline {
   agent { label 'drone'}
-  options {
-    skipDefaultCheckout()
-  }
   parameters {
     gitParameter(name: 'JENKINSDEV_BRANCH', type: 'PT_BRANCH_TAG', defaultValue: 'develop', branchFilter: 'origin/(.*)',
               useRepository: '.*/jenkins-dev', listSize: '10', quickFilterEnabled: true, selectedValue: 'DEFAULT', sortMode: 'ASCENDING_SMART')
