@@ -3,9 +3,9 @@
 
 pipeline {
   agent { label 'drone'}
-  options {
-    skipDefaultCheckout()
-  }
+  // options {
+  //   skipDefaultCheckout()
+  // }
   parameters {
     gitParameter(name: 'JENKINSDEV_BRANCH', type: 'PT_BRANCH_TAG', defaultValue: 'develop', branchFilter: 'origin/(.*)',
               useRepository: '.*/jenkins-dev', listSize: '10', quickFilterEnabled: true, selectedValue: 'DEFAULT', sortMode: 'ASCENDING_SMART')
@@ -16,11 +16,11 @@ pipeline {
     stage('Checkout structural') {
       steps {
         sh "rm -rf ${WORKSPACE}/* ${WORKSPACE}/.git"
-        checkout([$class: 'GitSCM',
-                  branches: [[name: params.STRUCTURAL_BRANCH]],
-                  extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'structural']],
-                  userRemoteConfigs: [[credentialsId: 'vidhance-reader-login', url: 'https://github.com/vidhance/structural']]
-        ])
+        // checkout([$class: 'GitSCM',
+        //           branches: [[name: params.STRUCTURAL_BRANCH]],
+        //           extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'structural']],
+        //           userRemoteConfigs: [[credentialsId: 'vidhance-reader-login', url: 'https://github.com/vidhance/structural']]
+        // ])
         echo "${params.JENKINSDEV_BRANCH}"
         echo "${params.STRUCTURAL_BRANCH}"
       }
