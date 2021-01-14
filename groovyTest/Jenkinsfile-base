@@ -8,6 +8,8 @@ pipeline {
         checkout scm
         echo "TESTAR PIPELINE groovy base test"
         script {
+            def private_var = 'private'
+            global_var = 'global'
             def helper = load 'groovyTest/helper.groovy'
             helper.test1()
         }
