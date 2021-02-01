@@ -1,18 +1,23 @@
-#!groovy -*- mode: groovy -*-
-
 pipeline {
-  agent { label 'drone'}
-
+  // Avoid hogging one of the more specialized agents
+  agent { label 'lancaster' }
   parameters {
-    run(name: 'SDK_BUILD', description: 'Run of /stable/sdk to copy artifacts from', filter: 'STABLE', projectName: getSuccessfulPipeline('sdk'))
+    run(name: 'MERGE_BUILD', description: 'Run of /sdk/merge to copy artifacts from', filter: 'STABLE', projectName: getProjectName("sdk/merge/${env.BRANCH_NAME}"))
   }
-
   stages {
-    stage('Checkout structural') {
+    stage('stage 1') {
       steps {
-        echo 'start'
-        //library("imint-jenkins-lib@develop")
+        sh "echo ${MERGE_BUILD_JOBNAME}"
+        sh "echo nice"
       }
     }
   }
+}
+
+def getProjectName(job) {
+  def existing_job = Jenkins.instance.getItemByFullName(job)
+  if (existing_job) {
+    if (existing_job.lastSuccessfulBuild) return job
+  }
+  return "sdk/merge/develop"
 }
